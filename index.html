@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Irene demo</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="codemirror/codemirror.css">
+
+    <style>
+      body {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+      .irene {
+        text-align: center;
+      }
+      .irenec {
+        width: auto;
+      }
+      .btn-irene {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+      .CodeMirror { height: auto; border: 1px solid #ddd; }
+      .CodeMirror pre { padding-left: 7px; line-height: 1.25; }
+    </style>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container irenec">
+      <div class="irene">
+        <h1>Prueba Irene</h1>
+      </div>
+      <div>
+        <form style="position: relative; margin-top: .5em;">
+          <script src="codemirror/codemirror.js"></script>
+          <script src="codemirror/addon/mode/simple.js"></script>
+          <script src="codemirror/addon/edit/matchbrackets.js"></script>
+          <textarea id="demoirene">
+def comma(n): if n == 1 then "" else ", " end
+
+def main():
+	result = ""
+	n = 1
+	while n <= 100 do
+		string = n.to_string()
+		if (n mod 15) == 0 then
+			string = "FizzBuzz"
+		elif (n mod 3) == 0 then
+			string = "Fizz"
+		elif (n mod 5) == 0 then
+			string = "Buzz"
+		end
+		result = result + @comma(n) + string
+		n = n + 1
+	end
+	result</textarea>
+        </form>
+        <script>
+          CodeMirror.defineSimpleMode("simplemode", {
+            start: [
+              {regex: /"(?:(?:\\\/)|(?:\\\\)|(?:\\n)|(?:\\\r)|(?:\\\t)|(?:\\")|(?:[^"\\]))*?"/,
+               token: "string"},
+              {regex: /(?:def|elif|then|else|do|mod|continue|break|and|or|not)\b/,
+               token: "keyword"},
+              {regex: /(?:struct|if|while)\b/,
+               token: "keyword", indent: true},
+              {regex: /(?:end)/,
+               token: "keyword", dedent: true},
+              {regex: /true|false/, token: "atom"},
+              {regex: /\d+/i,
+               token: "number"},
+              {regex: /\/\/.*/, token: "comment"},
+              {regex: /[-+\/*=<>:,]+/, token: "operator"},
+              {regex: /\(/, indent: true},
+              {regex: /\)/, dedent: true},
+              {regex: /[a-zA-Z][\w@_]*/, token: "variable"},
+              {regex: /@[\w@_]*/, token: "variable-2"},
+              {regex: /_[\w@_]*/, token: "variable-3"},
+            ],
+            meta: {
+              dontIndentStates: ["comment"],
+              lineComment: "//"
+            }
+          });
+
+          var editor = CodeMirror.fromTextArea(document.getElementById("demoirene"), {
+            lineNumbers: true,
+            mode: "simplemode",
+            matchBrackets: true,
+            viewportMargin: Infinity,
+            indentWithTabs: true,
+            indentUnit: 4
+          });
+        </script>
+        <div class="btn-irene irene">
+        <p>
+          <button type="button" class="btn btn-primary">Ejecuta!</button>
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>
