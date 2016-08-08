@@ -50,15 +50,15 @@ def main():
 	result = ""
 	n = 1
 	while n <= 100 do
-		string = n.to_string()
+		text = n.to_string()
 		if (n mod 15) == 0 then
-			string = "FizzBuzz"
+			text = "FizzBuzz"
 		elif (n mod 3) == 0 then
-			string = "Fizz"
+			text = "Fizz"
 		elif (n mod 5) == 0 then
-			string = "Buzz"
+			text = "Buzz"
 		end
-		result = result + @comma(n) + string
+		result = result + @comma(n) + text
 		n = n + 1
 	end
 	result</textarea>
