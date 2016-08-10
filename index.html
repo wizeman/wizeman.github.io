@@ -39,32 +39,13 @@
         <h1>Prueba Irene en tu navegador</h1>
       </div>
       <div>
-        <form style="position: relative; margin-top: .5em;">
-          <script src="codemirror/codemirror.js"></script>
-          <script src="codemirror/addon/mode/simple.js"></script>
-          <script src="codemirror/addon/edit/matchbrackets.js"></script>
-          <textarea id="demoirene">
-def comma(n): if n == 1 then "" else ", " end
-
-def main():
-	result = ""
-	n = 1
-	while n <= 100 do
-		text = n.to_string()
-		if (n mod 15) == 0 then
-			text = "FizzBuzz"
-		elif (n mod 3) == 0 then
-			text = "Fizz"
-		elif (n mod 5) == 0 then
-			text = "Buzz"
-		end
-		result = result + @comma(n) + text
-		n = n + 1
-	end
-	result</textarea>
-        </form>
+        <script src="codemirror/codemirror.js"></script>
+        <script src="codemirror/addon/mode/simple.js"></script>
+        <script src="codemirror/addon/edit/matchbrackets.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <textarea id="demoirene"></textarea>
         <script>
-          CodeMirror.defineSimpleMode("simplemode", {
+          CodeMirror.defineSimpleMode('simplemode', {
             start: [
               {regex: /"(?:(?:\\\/)|(?:\\\\)|(?:\\n)|(?:\\\r)|(?:\\\t)|(?:\\")|(?:[^"\\]))*?"/,
                token: "string"},
@@ -91,24 +72,47 @@ def main():
             }
           });
 
-          var editor = CodeMirror.fromTextArea(document.getElementById("demoirene"), {
-            lineNumbers: true,
-            mode: "simplemode",
-            matchBrackets: true,
-            viewportMargin: Infinity,
-            indentWithTabs: true,
-            indentUnit: 4
+          var editor = CodeMirror.fromTextArea(document.getElementById('demoirene'), {
+              lineNumbers: true,
+              mode: 'simplemode',
+              matchBrackets: true,
+              viewportMargin: Infinity,
+              indentWithTabs: true,
+              indentUnit: 4,
+              readOnly: true
           });
+
+          var example = $.get('example.ire', function(data) {
+            editor.doc.setValue(data);
+            editor.setOption('readOnly', false);
+          }, "text");
         </script>
         <div class="btn-irene irene">
         <p>
-          <button type="button" class="btn btn-primary">&iexcl;Ejecuta!</button>
+          <button type="button" class="btn btn-primary" id="run">¡Ejecuta!</button>
         </p>
         </div>
+        <textarea id="result"></textarea>
+        <script>
+          var result = CodeMirror.fromTextArea(document.getElementById('result'), {
+              lineNumbers: true,
+              mode: 'simplemode',
+              matchBrackets: true,
+              viewportMargin: Infinity,
+              indentWithTabs: true,
+              indentUnit: 4,
+              readOnly: 'nocursor'
+          });
+
+          var btn = document.getElementById('run');
+          btn.onclick = function() {
+            var pre = document.getElementById('result');
+            result.doc.setValue('Result:\n');
+          };
+        </script>
       </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
 </html>

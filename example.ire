@@ -1,0 +1,18 @@
+def comma(n): if n == 1 then "" else ", " end
+
+def main():
+	result = ""
+	n = 1
+	while n <= 100 do
+		text = n.to_string()
+		if (n mod 15) == 0 then
+			text = "FizzBuzz"
+		elif (n mod 3) == 0 then
+			text = "Fizz"
+		elif (n mod 5) == 0 then
+			text = "Buzz"
+		end
+		result = result + @comma(n) + text
+		n = n + 1
+	end
+	result
