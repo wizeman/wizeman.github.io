@@ -1,0 +1,19 @@
+body {
+  padding-bottom: 30px;
+}
+
+.irene {
+  text-align: center;
+}
+
+.irenec {
+  width: auto;
+}
+
+.btn-irene {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.CodeMirror { height: auto; border: 1px solid #ddd; }
+.CodeMirror pre { padding-left: 7px; line-height: 1.25; }

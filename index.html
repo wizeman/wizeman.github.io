@@ -11,23 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="codemirror/codemirror.css">
 
-    <style>
-      body {
-        padding-bottom: 30px;
-      }
-      .irene {
-        text-align: center;
-      }
-      .irenec {
-        width: auto;
-      }
-      .btn-irene {
-        padding-top: 30px;
-        padding-bottom: 30px;
-      }
-      .CodeMirror { height: auto; border: 1px solid #ddd; }
-      .CodeMirror pre { padding-left: 7px; line-height: 1.25; }
-    </style>
+    <link rel="stylesheet" href="index.css">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -39,80 +23,21 @@
         <h1>Prueba Irene en tu navegador</h1>
       </div>
       <div>
-        <script src="codemirror/codemirror.js"></script>
-        <script src="codemirror/addon/mode/simple.js"></script>
-        <script src="codemirror/addon/edit/matchbrackets.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <textarea id="demoirene"></textarea>
-        <script>
-          CodeMirror.defineSimpleMode('simplemode', {
-            start: [
-              {regex: /"(?:(?:\\\/)|(?:\\\\)|(?:\\n)|(?:\\\r)|(?:\\\t)|(?:\\")|(?:[^"\\]))*?"/,
-               token: "string"},
-              {regex: /(?:def|elif|then|else|do|mod|continue|break|and|or|not)\b/,
-               token: "keyword"},
-              {regex: /(?:struct|if|while)\b/,
-               token: "keyword", indent: true},
-              {regex: /(?:end)/,
-               token: "keyword", dedent: true},
-              {regex: /true|false/, token: "atom"},
-              {regex: /\d+/i,
-               token: "number"},
-              {regex: /\/\/.*/, token: "comment"},
-              {regex: /[-+\/*=<>:,]+/, token: "operator"},
-              {regex: /\(/, indent: true},
-              {regex: /\)/, dedent: true},
-              {regex: /[a-zA-Z][\w@_]*/, token: "variable"},
-              {regex: /@[\w@_]*/, token: "variable-2"},
-              {regex: /_[\w@_]*/, token: "variable-3"},
-            ],
-            meta: {
-              dontIndentStates: ["comment"],
-              lineComment: "//"
-            }
-          });
-
-          var editor = CodeMirror.fromTextArea(document.getElementById('demoirene'), {
-              lineNumbers: true,
-              mode: 'simplemode',
-              matchBrackets: true,
-              viewportMargin: Infinity,
-              indentWithTabs: true,
-              indentUnit: 4,
-              readOnly: true
-          });
-
-          var example = $.get('example.ire', function(data) {
-            editor.doc.setValue(data);
-            editor.setOption('readOnly', false);
-          }, "text");
-        </script>
+        <textarea id="demoirene">Cargando...</textarea>
         <div class="btn-irene irene">
         <p>
           <button type="button" class="btn btn-primary" id="run">¡Ejecuta!</button>
         </p>
         </div>
         <textarea id="result"></textarea>
-        <script>
-          var result = CodeMirror.fromTextArea(document.getElementById('result'), {
-              lineNumbers: true,
-              mode: 'simplemode',
-              matchBrackets: true,
-              viewportMargin: Infinity,
-              indentWithTabs: true,
-              indentUnit: 4,
-              readOnly: 'nocursor'
-          });
-
-          var btn = document.getElementById('run');
-          btn.onclick = function() {
-            var pre = document.getElementById('result');
-            result.doc.setValue('Result:\n');
-          };
-        </script>
       </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="codemirror/codemirror.js"></script>
+    <script src="codemirror/addon/mode/simple.js"></script>
+    <script src="codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
