@@ -53,7 +53,22 @@ var result = CodeMirror.fromTextArea(document.getElementById('result'), {
     readOnly: 'nocursor'
 });
 
+var socket = null;
+
 var btn = document.getElementById('run');
 btn.onclick = function() {
-  result.doc.setValue('Result:\n');
+  var contents = result.doc.getValue();
+
+  if (socket !== null) {
+    socket.onopen = function (event) {};
+    socket.onmessage = function (event) {};
+    socket.close();
+  }
+  socket = new WebSocket('wss://home.wizy.org', 'irene');
+  socket.onmessage = function (event) {
+    result.doc.setValue(event.data);
+  };
+  socket.onopen = function (event) {
+    socket.send(contents);
+  };
 };
