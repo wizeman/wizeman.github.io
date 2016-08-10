@@ -57,7 +57,7 @@ var socket = null;
 
 var btn = document.getElementById('run');
 btn.onclick = function() {
-  var contents = result.doc.getValue();
+  var contents = editor.doc.getValue();
 
   if (socket !== null) {
     socket.onopen = function (event) {};
