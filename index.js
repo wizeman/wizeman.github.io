@@ -53,22 +53,24 @@ var result = CodeMirror.fromTextArea(document.getElementById('result'), {
     readOnly: 'nocursor'
 });
 
-var socket = null;
-
 var btn = document.getElementById('run');
 btn.onclick = function() {
   var contents = editor.doc.getValue();
 
-  if (socket !== null) {
-    socket.onopen = function (event) {};
-    socket.onmessage = function (event) {};
-    socket.close();
-  }
-  socket = new WebSocket('wss://home.wizy.org', 'irene');
-  socket.onmessage = function (event) {
-    result.doc.setValue(event.data);
-  };
-  socket.onopen = function (event) {
-    socket.send(contents);
-  };
+  result.doc.setValue('Esperando respuesta del servidor...');
+
+  $.ajax({
+    method: 'POST',
+    crossDomain: true,
+    url: 'https://home.wizy.org/run_irene',
+    contentType: 'text/plain; charset=UTF-8',
+    data: contents,
+    dataType: 'text',
+
+/*eslint-disable no-unused-vars*/
+    success: function(data, textStatus, jqXHR) {
+/*eslint-enable no-unused-vars*/
+      result.doc.setValue(data);
+    },
+  });
 };
