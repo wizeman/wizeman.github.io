@@ -35,7 +35,8 @@ var editor = CodeMirror.fromTextArea(document.getElementById('demoirene'), {
     viewportMargin: Infinity,
     indentWithTabs: true,
     indentUnit: 4,
-    readOnly: true
+    readOnly: true,
+    lineWrapping: true
 });
 
 $.get('example.ire', function(data) {
@@ -50,7 +51,8 @@ var result = CodeMirror.fromTextArea(document.getElementById('result'), {
     viewportMargin: Infinity,
     indentWithTabs: true,
     indentUnit: 4,
-    readOnly: 'nocursor'
+    readOnly: 'nocursor',
+    lineWrapping: true
 });
 
 var btn = document.getElementById('run');
