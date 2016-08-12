@@ -3,8 +3,8 @@
 
 CodeMirror.defineSimpleMode('simplemode', {
   start: [
-    {regex: /"(?:(?:\\\/)|(?:\\\\)|(?:\\n)|(?:\\\r)|(?:\\\t)|(?:\\")|(?:[^"\\]))*?"/,
-     token: "string"},
+    {regex: /"/,
+     token: "string", next: "string"},
     {regex: /(?:def|elif|then|else|do|mod|continue|break|and|or|not)\b/,
      token: "keyword"},
     {regex: /(?:struct|if|while)\b/,
@@ -21,6 +21,16 @@ CodeMirror.defineSimpleMode('simplemode', {
     {regex: /[a-zA-Z][\w@_]*/, token: "variable"},
     {regex: /@[\w@_]*/, token: "variable-2"},
     {regex: /_[\w@_]*/, token: "variable-3"},
+  ],
+  string: [
+    {regex: /(?:(?:\\\\)|(?:\\n)|(?:\\\r)|(?:\\\t)|(?:\\")|(?:[^"\\]))*?"/,
+     token: "string", next: "start"},
+    {regex: /(?:(?:\\\\)|(?:\\n)|(?:\\\r)|(?:\\\t)|(?:\\")|(?:[^"\\]))*?\\$/,
+     token: "string"},
+    {regex: /.*/, token: "error", next: "error"},
+  ],
+  error: [
+    {regex: /.*/, token: "error"},
   ],
   meta: {
     dontIndentStates: ["comment"],
