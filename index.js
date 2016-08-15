@@ -38,32 +38,27 @@ CodeMirror.defineSimpleMode('simplemode', {
   }
 });
 
-var editor = CodeMirror.fromTextArea(document.getElementById('demoirene'), {
+function createEditor(element, readOnly) {
+  return CodeMirror.fromTextArea(document.getElementById(element), {
     lineNumbers: true,
     mode: 'simplemode',
     matchBrackets: true,
     viewportMargin: Infinity,
     indentWithTabs: true,
     indentUnit: 4,
-    readOnly: true,
-    lineWrapping: true
-});
+    lineWrapping: true,
+    readOnly: readOnly,
+  });
+}
+
+var editor = createEditor('demoirene', true);
 
 $.get('example.ire', function(data) {
   editor.doc.setValue(data);
   editor.setOption('readOnly', false);
 }, "text");
 
-var result = CodeMirror.fromTextArea(document.getElementById('result'), {
-    lineNumbers: true,
-    mode: 'simplemode',
-    matchBrackets: true,
-    viewportMargin: Infinity,
-    indentWithTabs: true,
-    indentUnit: 4,
-    readOnly: 'nocursor',
-    lineWrapping: true
-});
+var result = createEditor('result', 'nocursor');
 
 var btn = document.getElementById('run');
 btn.onclick = function() {
