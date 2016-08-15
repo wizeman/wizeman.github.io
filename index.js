@@ -82,7 +82,7 @@ btn.onclick = function() {
 /*eslint-disable no-unused-vars*/
     success: function(data, textStatus, jqXHR) {
 /*eslint-enable no-unused-vars*/
-      result.doc.setValue(data);
+      result.doc.setValue(data.trim());
     },
   });
 };
