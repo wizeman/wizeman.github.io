@@ -1,5 +1,5 @@
 /* eslint-env browser, jquery */
-/* global CodeMirror:false */
+/* global ace:false */
 
 function createEditor(id) {
   var editor = ace.edit(id);

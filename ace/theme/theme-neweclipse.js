@@ -1,4 +1,7 @@
+/* global ace:false */
+/*eslint-disable no-unused-vars*/
 ace.define("ace/theme/neweclipse",["require","exports","module","ace/lib/dom"], function(require, exports, module) {
+/*eslint-enable no-unused-vars*/
 "use strict";
 
 exports.isDark = false;
