@@ -81,7 +81,7 @@ btn.onclick = function() {
       result.doc.setValue(data.trim());
     },
     error: function(jqXHR, textStatus, errorThrown) {
-      var errorMsg = "Error contacting server: " + textStatus;
+      var errorMsg = "Error contactando servidor: " + textStatus;
       if ((errorThrown !== null) && (errorThrown.trim() !== "") && (errorThrown !== textStatus)) {
         errorMsg = errorMsg + " (" + errorThrown + ")";
       }
