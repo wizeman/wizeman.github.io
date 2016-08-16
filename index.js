@@ -73,11 +73,19 @@ btn.onclick = function() {
     contentType: 'text/plain; charset=UTF-8',
     data: contents,
     dataType: 'text',
+    timeout: 60000,
 
 /*eslint-disable no-unused-vars*/
     success: function(data, textStatus, jqXHR) {
 /*eslint-enable no-unused-vars*/
       result.doc.setValue(data.trim());
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      var errorMsg = "Error: " + textStatus;
+      if ((errorThrown !== null) && (errorThrown.trim() !== "") && (errorThrown !== textStatus)) {
+        errorMsg = errorMsg + " (" + errorThrown + ")";
+      }
+      result.doc.setValue(errorMsg);
     },
   });
 };
