@@ -15,5 +15,15 @@ body {
   padding-bottom: 30px;
 }
 
-.CodeMirror { height: auto; border: 1px solid #ddd; }
-.CodeMirror pre { padding-left: 7px; line-height: 1.25; }
+.ace_hidden-cursors {
+  opacity: 0;
+}
+
+.ace_editor {
+    border: 1px solid #ddd;
+}
+
+.ace_gutter {
+    background: #f7f7f7;
+    border-right: 1px solid #ddd;
+}

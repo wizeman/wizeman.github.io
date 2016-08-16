@@ -1,70 +1,52 @@
 /* eslint-env browser, jquery */
 /* global CodeMirror:false */
 
-CodeMirror.defineSimpleMode('simplemode', {
-  start: [
-    {regex: /"/,
-     token: "string", next: "string"},
-    {regex: /(?:def|elif|then|else|do|mod|continue|break|and|or|not)\b/,
-     token: "keyword"},
-    {regex: /(?:struct|if|while)\b/,
-     token: "keyword", indent: true},
-    {regex: /(?:end)/,
-     token: "keyword", dedent: true},
-    {regex: /true|false/, token: "atom"},
-    {regex: /\d+/i,
-     token: "number"},
-    {regex: /\/\/.*/, token: "comment"},
-    {regex: /[-+\/*=<>:,]+/, token: "operator"},
-    {regex: /\(/, indent: true},
-    {regex: /\)/, dedent: true},
-    {regex: /[a-zA-Z][\w@_]*/, token: "variable"},
-    {regex: /@[\w@_]*/, token: "variable-2"},
-    {regex: /_[\w@_]*/, token: "variable-3"},
-  ],
-  string: [
-    {regex: /(?:(?:\\\\)|(?:\\n)|(?:\\\r)|(?:\\\t)|(?:\\")|(?:[^"\\]))*?"/,
-     token: "string", next: "start"},
-    {regex: /(?:(?:\\\\)|(?:\\n)|(?:\\\r)|(?:\\\t)|(?:\\")|(?:[^"\\]))*?\\$/,
-     token: "string"},
-    {regex: /.*/, token: "error", next: "error"},
-  ],
-  error: [
-    {regex: /.*/, token: "error"},
-  ],
-  meta: {
-    dontIndentStates: ["comment"],
-    lineComment: "//"
-  }
-});
+function createEditor(id) {
+  var editor = ace.edit(id);
 
-function createEditor(element, readOnly) {
-  return CodeMirror.fromTextArea(document.getElementById(element), {
-    lineNumbers: true,
-    mode: 'simplemode',
-    matchBrackets: true,
-    viewportMargin: Infinity,
-    indentWithTabs: true,
-    indentUnit: 4,
-    lineWrapping: true,
-    readOnly: readOnly,
+  editor.$blockScrolling = Infinity;
+  editor.setTheme('ace/theme/neweclipse');
+  editor.setTheme('ace/theme/neweclipse');
+  editor.setReadOnly(true);
+  editor.setAutoScrollEditorIntoView(true);
+  editor.setShowPrintMargin(false);
+  editor.setDisplayIndentGuides(false);
+  editor.setHighlightActiveLine(false);
+  editor.setHighlightGutterLine(false);
+  editor.setShowFoldWidgets(false);
+  editor.setOptions({
+    minLines: 1,
+    maxLines: 5000,
+    fontSize: '12pt',
   });
+
+  editor.renderer.setOption('fixedWidthGutter', false);
+
+  var session = editor.getSession();
+
+  session.setOption('indentedSoftWrap', false);
+  session.setUseWrapMode(true);
+  session.setUseSoftTabs(false);
+  session.setMode('ace/mode/irene');
+
+  return editor;
 }
 
-var editor = createEditor('demoirene', true);
+var editor = createEditor('editor', true);
 
 $.get('example.ire', function(data) {
-  editor.doc.setValue(data);
-  editor.setOption('readOnly', false);
+  editor.setValue(data, -1);
+  editor.setReadOnly(false);
 }, "text");
 
 var result = createEditor('result', 'nocursor');
 
 var btn = document.getElementById('run');
-btn.onclick = function() {
-  var contents = editor.doc.getValue();
 
-  result.doc.setValue('Esperando respuesta del servidor...');
+btn.onclick = function() {
+  var contents = editor.getValue();
+
+  result.setValue('Esperando respuesta del servidor...', -1);
 
   $.ajax({
     method: 'POST',
@@ -78,14 +60,14 @@ btn.onclick = function() {
 /*eslint-disable no-unused-vars*/
     success: function(data, textStatus, jqXHR) {
 /*eslint-enable no-unused-vars*/
-      result.doc.setValue(data.trim());
+      result.setValue(data.trim(), -1);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       var errorMsg = "Error contactando servidor: " + textStatus;
       if ((errorThrown !== null) && (errorThrown.trim() !== "") && (errorThrown !== textStatus)) {
         errorMsg = errorMsg + " (" + errorThrown + ")";
       }
-      result.doc.setValue(errorMsg);
+      result.setValue(errorMsg, -1);
     },
   });
 };

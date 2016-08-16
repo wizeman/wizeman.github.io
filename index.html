@@ -9,7 +9,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="codemirror/codemirror.css">
 
     <link rel="stylesheet" href="index.css">
     <!--[if lt IE 9]>
@@ -23,20 +22,20 @@
         <h1>Prueba Irene en tu navegador</h1>
       </div>
       <div>
-        <textarea id="demoirene">Cargando...</textarea>
+        <div id="editor">Cargando...</div>
         <div class="btn-irene irene">
         <p>
           <button type="button" class="btn btn-primary" id="run">¡Ejecuta!</button>
         </p>
         </div>
-        <textarea id="result"></textarea>
+        <div id="result"></div>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="codemirror/codemirror.js"></script>
-    <script src="codemirror/addon/mode/simple.js"></script>
-    <script src="codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js"></script>
+    <script src="ace/theme/theme-neweclipse.js"></script>
+    <script src="ace/mode/irene.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
