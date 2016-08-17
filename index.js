@@ -42,14 +42,33 @@ $.get('example.ire', function(data) {
 
 var result = createEditor('result', 'nocursor');
 
-var btn = document.getElementById('run');
+var request = null;
 
-btn.onclick = function() {
+var btnclear = document.getElementById('clear');
+
+btnclear.onclick = function() {
+  if (request !== null) {
+    request.abort();
+    request = null;
+  }
+
+  editor.setValue('def main(): ', -1);
+  result.setValue('', -1);
+}
+
+var btnrun = document.getElementById('run');
+
+btnrun.onclick = function() {
   var contents = editor.getValue();
+
+  if (request !== null) {
+    request.abort();
+    request = null;
+  }
 
   result.setValue('Esperando respuesta del servidor...', -1);
 
-  $.ajax({
+  request = $.ajax({
     method: 'POST',
     crossDomain: true,
     url: 'https://home.wizy.org/run_irene',

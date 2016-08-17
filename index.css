@@ -2,7 +2,7 @@ body {
   padding-bottom: 30px;
 }
 
-.irene {
+.centered {
   text-align: center;
 }
 
@@ -10,9 +10,13 @@ body {
   width: auto;
 }
 
-.btn-irene {
-  padding-top: 30px;
-  padding-bottom: 30px;
+.padding {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.margin {
+  margin: 10px;
 }
 
 .ace_hidden-cursors {
