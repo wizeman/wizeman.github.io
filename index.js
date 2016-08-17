@@ -21,6 +21,7 @@ function createEditor(id) {
   });
 
   editor.renderer.setOption('fixedWidthGutter', false);
+  editor.renderer.setScrollMargin(4, 4);
 
   var session = editor.getSession();
 
