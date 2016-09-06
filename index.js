@@ -71,7 +71,7 @@ btnrun.onclick = function() {
   request = $.ajax({
     method: 'POST',
     crossDomain: true,
-    url: 'https://home.wizy.org/run_irene',
+    url: 'https://atom.wizy.org/run_irene',
     contentType: 'text/plain; charset=UTF-8',
     data: contents,
     dataType: 'text',
