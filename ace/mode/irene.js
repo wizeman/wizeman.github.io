@@ -36,10 +36,6 @@ define('ace/mode/irene_highlight_rules', function(require, exports, module) {
 					next: "string"
 				},
 				{
-					token: "tag",
-					regex: 'self\.[\\w_]*'
-				},
-				{
 					token: "keyword.source",
 					regex: '\\b(?:def|elif|then|else|do|mod|continue|break|and|or|not|struct|if|while|end|return|self)\\b'
 				},
@@ -60,7 +56,7 @@ define('ace/mode/irene_highlight_rules', function(require, exports, module) {
 					regex: '[a-zA-Z][\\w_]*'
 				},
 				{
-					token: "function",
+					token: "tag",
 					regex: '_[\\w_]*'
 				},
 			],
