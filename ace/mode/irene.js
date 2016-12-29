@@ -37,7 +37,7 @@ define('ace/mode/irene_highlight_rules', function(require, exports, module) {
 				},
 				{
 					token: "keyword.source",
-					regex: '\\b(?:def|elif|then|else|do|mod|continue|break|and|or|not|struct|if|while|end|return)\\b'
+					regex: '\\b(?:def|elif|then|else|do|mod|continue|break|and|or|not|struct|if|while|end|return|self)\\b'
 				},
 				{
 					token: "constant.buildin.language.source",
@@ -53,15 +53,15 @@ define('ace/mode/irene_highlight_rules', function(require, exports, module) {
 				},
 				{
 					token: "variable2",
-					regex: '[a-zA-Z][\\w@_]*'
+					regex: '[a-zA-Z][\\w_]*'
 				},
 				{
 					token: "tag",
-					regex: '@[\\w@_]*'
+					regex: 'self\.[\\w_]*'
 				},
 				{
 					token: "function",
-					regex: '_[\\w@_]*'
+					regex: '_[\\w_]*'
 				},
 			],
 			string: [

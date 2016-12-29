@@ -12,7 +12,7 @@ def main():
 		elif (n mod 5) == 0 then
 			text = "Buzz"
 		end
-		result = result + @comma(n) + text
+		result = result + self.comma(n) + text
 		n = n + 1
 	end
 	result
